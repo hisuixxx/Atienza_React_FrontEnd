@@ -53,8 +53,8 @@ export default function Post() {
             };
 
                 return (
-                    <div ClassName="post-container">
-                    <div ClassName="post-card">
+                    <div className="post-container">
+                    <div className="post-card">
                         <form onSubmit={submit} className="post-form">
                             <textarea
                                 value={message}
@@ -69,10 +69,31 @@ export default function Post() {
                                 {error}
                                 </div>
                           )}
+
+                          <div className="post-footer">
+
+                            <button 
+                            type="submit" 
+                            className="podt-submit-btn"
+                            disabled={processing ||  !message.trim()}
+                            >  {processing ? 'Posting...' : 'Post'}</button>
+
+                            </div>
                         </form>
-                    </div>  
+                    </div> 
+
+                    <div className="post-feed-list">
+                        {posts.length > 0 ? (posts.map((post) => (
+                            <PostCard key={post.id || Math.random()} post={post} />
+                        ))
+                    ) :  (
+                        <div className="post-empty-state"> No posts shared yet.</div>
+                    )}
+                    </div>
                     </div>
 
                 );
+   
+
 
 }
